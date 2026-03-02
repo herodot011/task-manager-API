@@ -8,7 +8,9 @@ The project demonstrates core backend development principles including clean arc
 
 Data is stored in memory (no database integration yet), allowing the focus to remain on backend architecture and business logic implementation.
 
-## ⚙️ The application follows a layered architecture to ensure separation of concerns
+## 🏗 Architecture
+
+The application follows a layered architecture to ensure separation of concerns.
 
 Client
   ↓
