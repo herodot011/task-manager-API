@@ -18,6 +18,17 @@ exports.findById = catchAsync(async(req, res) => {
     res.json(task);
 })
 
+exports.getTasksWithUsers = catchAsync(async(req, res) => {
+    const tasks = await tasksService.getTasksWithUsers();
+    res.json(tasks);
+})
+
+exports.getTasksByUserId = catchAsync(async(req, res) => {
+    const userId = req.params.id;
+    const tasks = await tasksService.getTasksByUserId(userId);
+    res.json(tasks);
+})
+
 exports.createTask = catchAsync(async(req, res) => {
     validateTask(req.body);
     const task = await tasksService.create(req.body);
