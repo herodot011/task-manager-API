@@ -33,16 +33,34 @@ Repositories
 
 
 ## 📁 Project Structure
+```
 src/
-│
 ├── controllers/
+│   ├── authControllers.js
+│   └── taskController.js
 ├── services/
+│   ├── authService.js
+│   └── taskService.js
 ├── repositories/
+│   ├── userRepository.js
+│   └── taskRepository.js
 ├── routes/
+│   ├── auth.js
+│   └── tasks.js
 ├── middlewares/
+│   ├── auth.js
+│   ├── checkRole.js
+│   ├── errorHandler.js
+│   ├── logger.js
+│   └── notFound.js
 ├── validators/
+│   ├── authValidator.js
+│   └── taskValidator.js
 ├── utils/
+│   ├── AppError.js
+│   └── catchAsync.js
 └── app.js
+```
 
 ## 🛠 Model Task
 {
