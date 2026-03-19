@@ -14,3 +14,37 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/tasks/1
+
+###
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Иван",
+    "email": "ivan5@mail.ru",
+    "password": "123"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "ivan5@mail.ru",
+    "password": "qwerty123"
+}
+
+###
+POST http://localhost:3000/tasks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJpdmFuNUBtYWlsLnJ1IiwiaWF0IjoxNzczODU0NzIxLCJleHAiOjE3NzQ0NTk1MjF9.06recFYFhtYv8bh6LVzESo6PpFtJqR7ZHezo2UWh0hs
+
+{
+    "title": "Новая задача"
+}
+
+###
+DELETE http://localhost:3000/tasks/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJpdmFuNUBtYWlsLnJ1Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzczOTE5MDY4LCJleHAiOjE3NzQ1MjM4Njh9.CMRFKMYMddI9uiTpIw37cLI_O6n3NRr4qG8u8iV0WNs

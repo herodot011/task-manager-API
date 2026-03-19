@@ -29,11 +29,11 @@ exports.getTasksByUserId = catchAsync(async(req, res) => {
     res.json(tasks);
 })
 
-exports.createTask = catchAsync(async(req, res) => {
-    validateTask(req.body);
-    const task = await tasksService.create(req.body);
-    res.status(201).json(task);
-});
+    exports.createTask = catchAsync(async(req, res) => {
+        validateTask(req.body);
+        const task = await tasksService.create({ ...req.body, user_id: req.user.id });
+        res.status(201).json(task);
+    });
 
 exports.deleteTask = catchAsync(async(req, res) => {
     const { id } = req.params;

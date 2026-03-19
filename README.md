@@ -64,13 +64,20 @@ git clone <repo-url>
 3. npm start
 
 ## 🛠 API Endpoints
+### Auth
+| Method | Route          | Description                  |Auth required  |
+|--------|----------------|------------------------------|---------------|
+| POST   | /auth/register | Register new user            | No            |
+| POST   | /auth/login    | Login                        | No            |
 
-| Method | Route          | Description                 |
-|--------|----------------|------------------------------|
-| GET    | /tasks         | Get all tasks                |
-| GET    | /tasks/:id     | Get a single task by ID      |
-| PATCH  | /tasks/:id     | Update task                  |
-| DELETE | /tasks/:id     | Delete a task                |
+### Tasks
+| Method | Route          | Description                  |Auth required  |
+|--------|----------------|------------------------------|---------------|
+| GET    | /tasks         | Get all tasks                | No            |
+| GET    | /tasks/:id     | Get a single task by ID      | No            |
+| POST   | /tasks         | Create task                  | Yes           |
+| PATCH  | /tasks/:id     | Update task                  | Yes           |
+| DELETE | /tasks/:id     | Delete a task                | Yes (admin)   |
 
 
 ## ✨ Features

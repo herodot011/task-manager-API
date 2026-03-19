@@ -36,15 +36,16 @@
 
 
     exports.create = async (data) => {
-        const { title, status } = data;
+        const { title, status, user_id } = data;
         const result = await pool.query(
-            `INSERT INTO tasks (title, status)
-            VALUES ($1, $2)
+            `INSERT INTO tasks (title, status, user_id) 
+            VALUES ($1, $2, $3)
             RETURNING *
             `,
             [
                 title || 'untitled',
-                status || 'pending'
+                status || 'pending',
+                user_id || null
             ]
         );
 
