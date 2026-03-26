@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(logger);
 
 const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 минут
-    max: 10,                   // максимум 10 запросов за окно
+    windowMs: 15 * 60 * 1000,
+    max: 10,                  
     message: {
         status: 'fail',
         message: 'Too many requests, please try again later'
@@ -25,7 +25,6 @@ const authLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-// Общий limiter для всего API
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
@@ -39,7 +38,7 @@ app.use('/auth', authLimiter, authRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = 3000;
+const PORT = process.end.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} port`)
