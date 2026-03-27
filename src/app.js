@@ -38,7 +38,7 @@ app.use('/auth', authLimiter, authRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.end.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} port`)
