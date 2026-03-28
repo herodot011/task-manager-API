@@ -1,4 +1,4 @@
-const pool = require('../config/jb')
+const pool = require('../config/db')
 
 exports.findByEmail = async(email) => {
     const result = await pool.query(`

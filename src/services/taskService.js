@@ -2,25 +2,19 @@ const taskRepository = require('../repositories/taskRepository');
 const AppError = require('../utils/AppError');
 
 exports.getAll = async ({ status, page = 1, limit = 10}) => {
-    let tasks = await taskRepository.findAll();
-    if(status) {
-        tasks = tasks.filter(task => task.status === status);
-    }
-    page = Number(page);
-    limit = Number(limit);
-    
-    const start = (page - 1) * limit;
-    const end = start + Number(limit);
+    page = Math.max(1, Number(page));
+    limit = Math.min(100, Math.max(1, Number(limit)));
 
-    console.log(tasks);
+    const { rows, total } = await taskRepository.findAll({ status, page, limit });
 
     return {
-        total: tasks.length,
-        page: Number(page),
-        limit: Number(limit),
-        data: tasks.slice(start, end)
+        total, 
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+        data: rows
     };
-};
+}
 
 exports.getTasksWithUsers = async () => {
     const tasks = await taskRepository.getTasksWithUsers();

@@ -1,9 +1,33 @@
     const { v4: uuidv4 } = require('uuid');
     const pool = require('../config/jb');
 
-    exports.findAll = async () => {
-        const result = await pool.query('SELECT * FROM tasks');
-        return  result.rows;
+    exports.findAll = async ({ status, page = 1, limit = 10 }) => {
+        const offset = (page - 1) *  limit;
+        const values = [];
+        let whereClause = '';
+
+        if(status) {
+            values.push(status);
+            whereClause = `WHERE status = $${values.length}`
+        }
+
+        const countResult = await pool.query(
+            `SELECT COUNT(*) FROM tasks ${whereClause}`,
+            values
+        );
+
+        const total = parseInt(countResult.rows[0].count)
+
+        values.push(limit);
+        values.push(offset);
+
+        const result = await pool.query(
+        `SELECT * FROM tasks ${whereClause}
+        ORDER BY created_at DESC
+        LIMIT $${values.length - 1} OFFSET $${values.length}`,
+        values
+        );
+        return { rows: result.rows, total };
     }
 
     exports.getTasksWithUsers = async () => {
