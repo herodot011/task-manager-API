@@ -1,5 +1,5 @@
     const { v4: uuidv4 } = require('uuid');
-    const pool = require('../config/jb');
+    const pool = require('../config/db');
 
     exports.findAll = async ({ status, page = 1, limit = 10 }) => {
         const offset = (page - 1) *  limit;
