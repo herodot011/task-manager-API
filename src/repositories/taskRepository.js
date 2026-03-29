@@ -95,18 +95,25 @@
     }
 
     exports.update = async (id, updatedTask) => {
+        const ALLOWED_UPDATE_FIELDS = ['title', 'status'];
         const fields = [];
         const values = [];
         let index = 1;
 
-        for (const key in updatedTask) {
-            fields.push(`${key} = $${index}`);
-            values.push(updatedTask[key])
-            index++;
+        for (const key of ALLOWED_UPDATE_FIELDS) {
+            if (updatedTask[key] !== undefined) {
+                fields.push(`${key} = $${index}`);
+                values.push(updatedTask[key]);
+                index++;
+            }
         }
 
-        values.push(id);
+        if (fields.length === 0) {
+            throw new AppError('No valid fields to update', 400);
+        }
 
+        fields.push(`updated_at = NOW()`);
+        values.push(id);
         const query = `
             UPDATE tasks
             SET ${fields.join(', ')}
@@ -115,8 +122,8 @@
         `;
 
         const result = await pool.query(query, values);
-
-        return result.rows[0]
+        return result.rows[0];
+    }
 
         // const index = tasks.findIndex(t => t.id === id);
         // if(index === -1) {
