@@ -1,5 +1,5 @@
-    const { v4: uuidv4 } = require('uuid');
     const pool = require('../config/db');
+    const AppError = require('../utils/AppError');
 
     exports.findAll = async ({ status, page = 1, limit = 10 }) => {
         const offset = (page - 1) *  limit;
@@ -135,4 +135,3 @@
         //     updatedAt: new Date().toISOString()
         // };
         // return tasks[index];
-    }
