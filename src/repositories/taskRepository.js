@@ -86,12 +86,12 @@
     }
 
     exports.delete = async (id) => {
-        const result = await pool.query(
-            'DELETE FROM tasks WHERE id = $1',
-            [id]
-        )
-
-        return result.rowCount;
+        exports.delete = async (id) => {
+            await pool.query(
+                'DELETE FROM tasks WHERE id = $1',
+                [id]
+            );
+        }
     }
 
     exports.update = async (id, updatedTask) => {
